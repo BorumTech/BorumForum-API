@@ -7,11 +7,11 @@
   "rewrites": [
     {
       "source": "/:name",
-      "destination": "/api/:name*"
+      "destination": "/api/:name"
     },
     {
       "source": "/questions/:id",
-      "destination": "/api/question?id=:id*"
+      "destination": "/api/question"
     }
   ]
 }
