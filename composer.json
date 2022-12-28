@@ -3,7 +3,7 @@
     "description": "REST API for Borum Forum",
     "type": "project",
     "require": {
-        "varuns/php-sleep": "^1.9.1",
+        "varuns/php-sleep": "^1.9",
         "vlucas/phpdotenv": "5.5"
     },
     "autoload": {

@@ -3,10 +3,10 @@
 require __DIR__ . "/../vendor/autoload.php";
 
 use VarunS\PHPSleep\Route;
-use BorumForum\DBHandlers\QuestionHandler;
+use VarunS\PHPSleep\DotEnv;
 
 $route = new Route();
-$handler = new QuestionHandler();
+Dotenv::loadIfLocal();
 
 $route->get(function() {
     return [
