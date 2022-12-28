@@ -6,12 +6,12 @@
   },
   "rewrites": [
     {
-      "src": "/:name",
-      "dest": "/api/:name*"
+      "source": "/:name",
+      "destination": "/api/:name*"
     },
     {
-      "src": "/questions/:id",
-      "dest": "/question.php?id=:id*"
+      "source": "/questions/:id",
+      "destination": "/question.php?id=:id*"
     }
   ]
 }
