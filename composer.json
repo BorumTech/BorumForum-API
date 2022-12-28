@@ -1,0 +1,12 @@
+{
+    "name": "varuns/borumforum-api",
+    "description": "REST API for Borum Forum",
+    "type": "project",
+    "require": {
+        "varuns/php-sleep": "^1.8.0",
+        "vlucas/phpdotenv": "5.5"
+    },
+    "scripts": {
+        "test": "phpunit tests"
+    }
+}
