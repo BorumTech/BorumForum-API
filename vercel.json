@@ -11,7 +11,7 @@
     },
     {
       "source": "/questions/:id",
-      "destination": "/question.php?id=:id*"
+      "destination": "/api/question?id=:id*"
     }
   ]
 }
