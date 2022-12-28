@@ -4,14 +4,14 @@
       "runtime": "vercel-php@0.5.2"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/*",
-      "dest": "/api/$1.php"
+      "src": "/:name",
+      "dest": "/api/:name*"
     },
     {
-      "src": "/questions/([1-9]+)",
-      "dest": "/question.php?id=$1"
+      "src": "/questions/:id",
+      "dest": "/question.php?id=:id*"
     }
   ]
 }
