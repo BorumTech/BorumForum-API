@@ -5,8 +5,16 @@
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
 
-// Check the request method and path to determine the appropriate response
-if ($method === 'GET' && preg_match('/^\/([^\/]+)/', $path, $matches)) {
+if ($method === 'GET' && preg_match('/^\/questions\/(\d+)$/', $path, $matches)) {
+  // The path matches the route, so retrieve the number from the URL
+  $number = intval($matches[1]);
+  $filePath = $_SERVER['DOCUMENT_ROOT'] . "\api\question.php";
+  if (is_readable($filePath)) {
+    $_GET['id'] = $number;
+    include $filePath;
+    exit();
+  }
+} else if ($method === 'GET' && preg_match('/^\/([^\/]+)/', $path, $matches)) {
   // Extract the name of the file from the route
   $name = $matches[1];
 
@@ -15,18 +23,11 @@ if ($method === 'GET' && preg_match('/^\/([^\/]+)/', $path, $matches)) {
   if (is_readable($filePath)) {
     // Include the file and return its output
     include $filePath;
-  } else {
-    // Return a 404 error if the file does not exist or is not readable
-    http_response_code(404);
-    echo 'Not Found';
+    exit();
   }
-} else if (preg_match('/^\/questions\/(\d+)$/', $uri, $matches)) {
-  // The path matches the route, so retrieve the number from the URL
-  $number = intval($matches[1]);
-  $filePath = "api/question.php?id=$number";
-  // Retrieve and display the relevant information for the question with the ID $number
-} else {
-  // Return a 404 error for any other paths or methods
-  http_response_code(404);
-  echo 'Not Found';
-}
+} 
+
+// Return a 404 error for any other paths or methods
+http_response_code(404);
+echo 'Not Found';
+
