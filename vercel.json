@@ -6,16 +6,12 @@
   },
   "routes": [
     {
-      "src": "/login",
-      "dest": "/api/login.php"
+      "src": "/:name",
+      "dest": "/api/*.php"
     },
     {
-      "src": "/register",
-      "dest": "/api/register.php"
-    },
-    {
-      "src": "/questions",
-      "dest": "/api/questions.php"
+      "src": "/questions/:number",
+      "dest": "/question.php"
     }
   ]
 }
