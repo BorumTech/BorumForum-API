@@ -6,12 +6,12 @@
   },
   "routes": [
     {
-      "src": "/:name",
-      "dest": "/api/*.php"
+      "src": "/*",
+      "dest": "/api/$1.php"
     },
     {
-      "src": "/questions/:number",
-      "dest": "/question.php"
+      "src": "/questions/([1-9]+)",
+      "dest": "/question.php?id=$1"
     }
   ]
 }
