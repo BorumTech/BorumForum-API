@@ -31,5 +31,3 @@ if ($method === 'GET' && preg_match('/^\/questions\/(\d+)$/', $path, $matches)) 
 http_response_code(404);
 echo 'Not Found';
 
-
-
