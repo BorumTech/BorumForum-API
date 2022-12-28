@@ -25,9 +25,25 @@ if ($method === 'GET' && preg_match('/^\/questions\/(\d+)$/', $path, $matches)) 
     include $filePath;
     exit();
   }
-} 
+}
+ 
 
 // Return a 404 error for any other paths or methods
 http_response_code(404);
-echo 'Not Found';
 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borum Forum API</title>
+</head>
+
+<body>
+<h1>Borum Forum REST API</h1>
+</body>
+
+</html>

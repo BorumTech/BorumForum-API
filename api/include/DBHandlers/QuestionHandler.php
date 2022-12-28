@@ -4,7 +4,7 @@ namespace BorumForum\DBHandlers;
 
 use VarunS\PHPSleep\DBHandlers\DBHandler;
 
-class PostListHandler {
+class QuestionHandler {
     private $dao;
 
     public function __construct() {
@@ -17,7 +17,7 @@ class PostListHandler {
      */
     public function list($minId = 0)
     {
-        $r = $this->dao->executeQuery("SELECT * FROM questions WHERE id > $minId ORDER BY id DESC LIMIT 50");
+        $r = $this->dao->executeQuery("SELECT * FROM questions WHERE id > $minId ORDER BY id DESC LIMIT 10");
         return mysqli_fetch_all($r, MYSQLI_ASSOC);
     }
 
