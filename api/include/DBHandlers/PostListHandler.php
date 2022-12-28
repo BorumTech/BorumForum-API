@@ -2,15 +2,23 @@
 
 namespace BorumForum\DBHandlers;
 
-class QuestionHandler extends UserKnownHandler implements PerpetuallyTemporary {
-    public function __construct($userApiKey) {
-        parent::__construct($userApiKey);
+use VarunS\PHPSleep\DBHandlers\DBHandler;
+
+class PostListHandler {
+    private $dao;
+
+    public function __construct() {
+        $this->dao = DBHandler::configDBFromEnv();
     }
 
+    /**
+     * List the first 50 questions or the next 50 questions after $minId The id to start after
+     * @return array All the questions as an array of associative arrays
+     */
     public function list($minId = 0)
     {
-        $r = $this->executeQuery("SELECT * FROM questions WHERE id > $minId ORDER BY id DESC LIMIT 50");
-        return mysqli_fetch_all($r);
+        $r = $this->dao->executeQuery("SELECT * FROM questions WHERE id > $minId ORDER BY id DESC LIMIT 50");
+        return mysqli_fetch_all($r, MYSQLI_ASSOC);
     }
 
     public function create($data) {

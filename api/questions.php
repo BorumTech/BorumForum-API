@@ -1,13 +1,17 @@
 <?php 
 
-require '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-use BorumForum\DBHandlers\QuestionHandler;
-use BorumForum\Route;
+use BorumForum\DBHandlers\PostListHandler;
+use VarunS\PHPSleep\Route;
+use VarunS\PHPSleep\DotEnv;
+
+$env = new DotEnv(__DIR__ . '/../.env');
+$env->load();
 
 $route = new Route();
-$handler = new QuestionHandler($route->apiKey);
 
 $route->get(function() {
-    $handler->list();
+    $handler = new PostListHandler();
+    return $handler->list();
 });
