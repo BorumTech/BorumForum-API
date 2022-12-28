@@ -3,10 +3,17 @@
     "description": "REST API for Borum Forum",
     "type": "project",
     "require": {
-        "varuns/php-sleep": "^1.8.0",
+        "varuns/php-sleep": "^1.9.1",
         "vlucas/phpdotenv": "5.5"
     },
+    "autoload": {
+        "psr-4": {
+            "BorumForum\\": "api/include",
+            "BorumForum\\DBHandlers\\": "api/include/DBHandlers"
+        }
+    },
     "scripts": {
-        "test": "phpunit tests"
+        "test": "phpunit tests",
+        "dev": "php -S localhost:8000"
     }
 }
