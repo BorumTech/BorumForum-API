@@ -5,7 +5,7 @@
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
 
-if ($method === 'GET' && preg_match('/^\/questions\/(\d+)$/', $path, $matches)) {
+if (preg_match('/^\/questions\/(\d+)$/', $path, $matches)) {
   // The path matches the route, so retrieve the number from the URL
   $number = intval($matches[1]);
   $filePath = $_SERVER['DOCUMENT_ROOT'] . "\api\question.php";
@@ -14,7 +14,7 @@ if ($method === 'GET' && preg_match('/^\/questions\/(\d+)$/', $path, $matches)) 
     include $filePath;
     exit();
   }
-} else if ($method === 'GET' && preg_match('/^\/([^\/]+)/', $path, $matches)) {
+} else if (preg_match('/^\/([^\/]+)/', $path, $matches)) {
   // Extract the name of the file from the route
   $name = $matches[1];
 

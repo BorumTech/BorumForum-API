@@ -13,3 +13,5 @@ $route->get(function() {
         "requestedId" => $_GET['id']
     ];
 });
+
+echo $_SERVER['REQUEST_METHOD'];
