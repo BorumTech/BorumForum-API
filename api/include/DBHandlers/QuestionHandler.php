@@ -15,7 +15,6 @@ class QuestionHandler {
    
 
     public function create($data) {
-        
         $subject = $this->dao->sanitizeParam($data['subject']);
         $body = $this->dao->sanitizeParam($data['body']);
 

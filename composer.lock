@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "varuns/php-sleep",
-            "version": "v1.9.11",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/varunsingh87/php-sleep.git",
-                "reference": "bcca211afd38e98c0d98080a1aedf2847cd30fe1"
+                "reference": "3df6bdbf8eb2f16902c1f439d022b1d3208afdad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/varunsingh87/php-sleep/zipball/bcca211afd38e98c0d98080a1aedf2847cd30fe1",
-                "reference": "bcca211afd38e98c0d98080a1aedf2847cd30fe1",
+                "url": "https://api.github.com/repos/varunsingh87/php-sleep/zipball/3df6bdbf8eb2f16902c1f439d022b1d3208afdad",
+                "reference": "3df6bdbf8eb2f16902c1f439d022b1d3208afdad",
                 "shasum": ""
             },
             "require-dev": {
@@ -43,9 +43,9 @@
             "description": "An object-oriented PHP library for a simple REST service",
             "support": {
                 "issues": "https://github.com/varunsingh87/php-sleep/issues",
-                "source": "https://github.com/varunsingh87/php-sleep/tree/v1.9.11"
+                "source": "https://github.com/varunsingh87/php-sleep/tree/v1.10.0"
             },
-            "time": "2022-12-29T04:45:56+00:00"
+            "time": "2022-12-29T16:46:42+00:00"
         }
     ],
     "packages-dev": [],
