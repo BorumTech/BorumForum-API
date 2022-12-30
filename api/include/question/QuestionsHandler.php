@@ -1,13 +1,15 @@
-<?php 
+<?php
 
-namespace BorumForum\DBHandlers;
+namespace BorumForum\Questions;
 
 use VarunS\PHPSleep\DBHandlers\DBHandler;
 
-class QuestionsHandler {
+class QuestionsHandler
+{
     private $dao;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->dao = DBHandler::configDBFromEnv();
     }
 
@@ -23,7 +25,8 @@ class QuestionsHandler {
         return mysqli_fetch_all($r, MYSQLI_ASSOC);
     }
 
-    public function get($id) {
+    public function getQuestionInfo($id)
+    {
         if (!is_numeric($id)) {
             throw new \Exception("Id must be a number");
         }
@@ -34,21 +37,36 @@ class QuestionsHandler {
         if (mysqli_num_rows($r) < 1) {
             throw new \Exception("Question Not Found", 404);
         }
-        
+
         $questionData = $r->fetch_assoc();
 
+        return $questionData;
+    }
+
+    public function getVotes($id)
+    {
         $r = $this->dao->executeQuery("SELECT SUM(vote) AS vote_count FROM `user-question-votes` WHERE question_id = $id GROUP BY question_id");
-        
+
         $votes = ["vote_count" => 0];
         if (mysqli_num_rows($r) >= 1) {
             $votes = $r->fetch_assoc();
         }
 
+        return $votes;
+    }
+
+    public function getComments($id)
+    {
         $r = $this->dao->executeQuery("SELECT body, date_written, user_id, users.first_name, users.last_name FROM `question-comments` JOIN firstborumdatabase.users ON `question-comments`.user_id = users.id WHERE question_id = $id");
         $comments = $r->fetch_all(MYSQLI_ASSOC);
 
-        return array_merge($questionData, $votes, ['comments' => $comments]);
+        return $comments;
+    }
+
+    public function getUserVoted($questionId, $userId)
+    {
+        $r = $this->dao->executeQuery("SELECT id FROM `user-question-votes` WHERE user_id = $userId AND question_id = $questionId");
+
+        return mysqli_num_rows($r) >= 1;
     }
 }
-
-?>
