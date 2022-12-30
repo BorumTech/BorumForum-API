@@ -1,6 +1,6 @@
 <?php 
 
-namespace BorumForum\DBHandlers;
+namespace BorumForum\Questions;
 
 use VarunS\PHPSleep\DBHandlers\DBHandler;
 
