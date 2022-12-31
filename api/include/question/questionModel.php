@@ -19,19 +19,19 @@ class QuestionModel
         $userHandler = new UserKnownHandler($userApiKey);
 
         return array_merge(
-            $this->guestHandler->getComments($questionId),
             $this->guestHandler->getQuestionInfo($questionId),
             $this->guestHandler->getVotes($questionId),
-            $userHandler->getUserVoted($questionId)
+            $userHandler->getUserVoted($questionId),
+            ["comments" => $this->guestHandler->getComments($questionId)]
         );
     }
 
     public function get($questionId)
     {
         return array_merge(
-            $this->guestHandler->getComments($questionId),
             $this->guestHandler->getQuestionInfo($questionId),
-            $this->guestHandler->getVotes($questionId)
+            $this->guestHandler->getVotes($questionId),
+            ["comments" => $this->guestHandler->getComments($questionId)]
         );
     }
 
@@ -49,10 +49,14 @@ class QuestionModel
     public function delete(string $userApiKey, int $id)
     {
         $handler = new UserKnownHandler($userApiKey);
-        if ($handler->getUserAuthored($id)) {
-            return $handler->delete($id);
-        } else {
-            throw new Exception('You do not have permission to delete that post', 403);
+        $question = $handler->getQuestion($id);
+
+        if (!$question) {
+            throw new Exception('Question not found', 404);
+        }
+
+        if ($question['user_authored']) {
+            return $handler->delete($id) || throw new Exception("An internal server error occurred", 500);
         }
     }
 }
