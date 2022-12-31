@@ -22,10 +22,16 @@ class UserKnownHandler
         return mysqli_num_rows($r) >= 1;
     }
 
-    function getUserAuthored($questionId)
+    function getQuestion($questionId)
     {
         $r = $this->dao->executeQuery("SELECT user_id FROM questions WHERE id = $questionId");
-        return mysqli_fetch_assoc($r)['user_id'] === $this->user['id'];
+        $question = mysqli_fetch_assoc($r);
+
+        if (mysqli_num_rows($r) < 1) {
+            return false;
+        }
+
+        return array_merge($question, ["user_authored" => $question['user_id'] === $this->user['id']]);
     }
 
     public function create($data)
