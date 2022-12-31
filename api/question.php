@@ -2,11 +2,8 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 
-use VarunS\PHPSleep\Route;
-use VarunS\PHPSleep\DotEnv;
 use BorumForum\Questions\QuestionRoute;
+use VarunS\PHPSleep\DotEnv;
 
-$route = new Route();
-Dotenv::loadIfLocal();
-
+DotEnv::loadIfLocal();
 new QuestionRoute();

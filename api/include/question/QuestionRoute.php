@@ -12,12 +12,17 @@ class QuestionRoute
     {
         $this->model = new QuestionModel();
         $route = new Route();
+
         $route->get(function ($request) {
             if ($request->hasHeader("authorization")) {
                 return $this->model->getWithUserInfo($_GET['id'], $request->authorize());
             } else {
                 return $this->model->get($_GET['id']);
             }
+        });
+
+        $route->delete(function ($request) {
+            return $this->model->delete($request->authorize(), $_GET['id']);
         });
     }
 }

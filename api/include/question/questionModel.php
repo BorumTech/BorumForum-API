@@ -2,6 +2,8 @@
 
 namespace BorumForum\Questions;
 
+use Exception;
+
 class QuestionModel
 {
 
@@ -42,5 +44,15 @@ class QuestionModel
     {
         $handler = new UserKnownHandler($userApiKey);
         return $handler->create($data);
+    }
+
+    public function delete(string $userApiKey, int $id)
+    {
+        $handler = new UserKnownHandler($userApiKey);
+        if ($handler->getUserAuthored($id)) {
+            return $handler->delete($id);
+        } else {
+            throw new Exception('You do not have permission to delete that post', 403);
+        }
     }
 }
