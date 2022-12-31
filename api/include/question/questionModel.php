@@ -2,7 +2,7 @@
 
 namespace BorumForum\Questions;
 
-class Question
+class QuestionModel
 {
 
     private $guestHandler;
