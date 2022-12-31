@@ -22,6 +22,18 @@ class UserKnownHandler
         return mysqli_num_rows($r) >= 1;
     }
 
+    function getQuestion($questionId)
+    {
+        $r = $this->dao->executeQuery("SELECT user_id FROM questions WHERE id = $questionId");
+        $question = mysqli_fetch_assoc($r);
+
+        if (mysqli_num_rows($r) < 1) {
+            return false;
+        }
+
+        return array_merge($question, ["user_authored" => $question['user_id'] === $this->user['id']]);
+    }
+
     public function create($data)
     {
         $subject = $this->dao->sanitizeParam($data['subject']);
@@ -43,8 +55,10 @@ class UserKnownHandler
         }
     }
 
-    public function delete($id)
+    function delete($id)
     {
+        $this->dao->executeQuery("DELETE FROM questions WHERE id = $id AND user_id = {$this->user['id']}");
+        return $this->dao->lastQueryWasSuccessful();
     }
 
     /**

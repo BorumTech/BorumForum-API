@@ -6,12 +6,13 @@ use VarunS\PHPSleep\Route;
 
 class QuestionRoute
 {
-    private Question $model;
+    private QuestionModel $model;
 
     public function __construct()
     {
-        $this->model = new Question();
+        $this->model = new QuestionModel();
         $route = new Route();
+
         $route->get(function ($request) {
             if ($request->hasHeader("authorization")) {
                 return $this->model->getWithUserInfo($_GET['id'], $request->authorize());
@@ -19,23 +20,9 @@ class QuestionRoute
                 return $this->model->get($_GET['id']);
             }
         });
-    }
-}
 
-class QuestionsRoute
-{
-    private Question $model;
-
-    public function __construct()
-    {
-        $this->model = new Question();
-        $route = new Route();
-        $route->get(function ($request) {
-            return $this->model->list($_GET['min_id']);
-        });
-
-        $route->post(function ($request) {
-            return $this->model->create($request->authorize(), $_POST);
+        $route->delete(function ($request) {
+            return $this->model->delete($request->authorize(), $_GET['id']);
         });
     }
 }

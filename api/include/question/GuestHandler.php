@@ -22,13 +22,14 @@ class GuestHandler
         $r = $this->dao->executeQuery("SELECT questions.id, subject, body, date_entered, questions.user_id, users.first_name, users.last_name 
         FROM questions JOIN firstborumdatabase.users ON questions.user_id = users.id 
         WHERE questions.id > $minId ORDER BY questions.id DESC LIMIT 50");
+
         return mysqli_fetch_all($r, MYSQLI_ASSOC);
     }
 
     public function getQuestionInfo($id)
     {
         if (!is_numeric($id)) {
-            throw new \Exception("Id must be a number");
+            throw new \Exception("Question ID must be a number", 400);
         }
 
         $r = $this->dao->executeQuery("SELECT questions.id, questions.user_id, questions.subject, questions.body, questions.date_entered, users.first_name, users.last_name, users.profile_picture FROM questions 

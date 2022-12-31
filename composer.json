@@ -3,12 +3,11 @@
     "description": "REST API for Borum Forum",
     "type": "project",
     "require": {
-        "varuns/php-sleep": "^1.9"
+        "varuns/php-sleep": "^1.11"
     },
     "autoload": {
         "psr-4": {
-            "BorumForum\\": "api/include",
-            "BorumForum\\DBHandlers\\": "api/include/DBHandlers"
+            "BorumForum\\Questions\\": "api/include/question"
         }
     },
     "scripts": {
