@@ -4,25 +4,43 @@ namespace BorumForum\Questions;
 
 class Question
 {
-    private static $handler = new QuestionsHandler();
 
-    public static function getWithUserInfo($questionId, $userId)
+    private $guestHandler;
+
+    function __construct()
     {
+        $this->guestHandler = new GuestHandler();
+    }
+
+    public function getWithUserInfo($questionId, $userApiKey)
+    {
+        $userHandler = new UserKnownHandler($userApiKey);
+
         return array_merge(
-            Question::$handler->getComments($questionId),
-            Question::$handler->getQuestionInfo($questionId),
-            Question::$handler->getVotes($questionId),
-            Question::$handler->getUserVoted($questionId, $userId)
+            $this->guestHandler->getComments($questionId),
+            $this->guestHandler->getQuestionInfo($questionId),
+            $this->guestHandler->getVotes($questionId),
+            $userHandler->getUserVoted($questionId)
         );
     }
 
     public function get($questionId)
     {
-        $handler = new QuestionsHandler();
         return array_merge(
-            $handler->getComments($questionId),
-            $handler->getQuestionInfo($questionId),
-            $handler->getVotes($questionId)
+            $this->guestHandler->getComments($questionId),
+            $this->guestHandler->getQuestionInfo($questionId),
+            $this->guestHandler->getVotes($questionId)
         );
+    }
+
+    public function list(int $minId)
+    {
+        return $this->guestHandler->list($minId);
+    }
+
+    public function create($userApiKey, $data)
+    {
+        $handler = new UserKnownHandler($userApiKey);
+        return $handler->create($data);
     }
 }
