@@ -1,0 +1,17 @@
+{
+    "name": "varuns/borumforum-api",
+    "description": "REST API for Borum Forum",
+    "type": "project",
+    "require": {
+        "varuns/php-sleep": "^1.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "BorumForum\\Questions\\": "api/include/question"
+        }
+    },
+    "scripts": {
+        "test": "phpunit tests",
+        "dev": "php -S localhost:8000"
+    }
+}
