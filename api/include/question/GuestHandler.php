@@ -22,6 +22,9 @@ class GuestHandler
         $r = $this->dao->executeQuery("SELECT questions.id, subject, body, date_entered, questions.user_id, users.first_name, users.last_name 
         FROM questions JOIN firstborumdatabase.users ON questions.user_id = users.id 
         WHERE questions.id > $minId ORDER BY questions.id DESC LIMIT 50");
+
+        echo mysqli_error($this->dao->getConnection());
+
         return mysqli_fetch_all($r, MYSQLI_ASSOC);
     }
 
