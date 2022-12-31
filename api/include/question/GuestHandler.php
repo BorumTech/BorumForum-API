@@ -4,7 +4,7 @@ namespace BorumForum\Questions;
 
 use VarunS\PHPSleep\DBHandlers\DBHandler;
 
-class QuestionsHandler
+class GuestHandler
 {
     private $dao;
 
@@ -61,12 +61,5 @@ class QuestionsHandler
         $comments = $r->fetch_all(MYSQLI_ASSOC);
 
         return $comments;
-    }
-
-    public function getUserVoted($questionId, $userId)
-    {
-        $r = $this->dao->executeQuery("SELECT id FROM `user-question-votes` WHERE user_id = $userId AND question_id = $questionId");
-
-        return mysqli_num_rows($r) >= 1;
     }
 }

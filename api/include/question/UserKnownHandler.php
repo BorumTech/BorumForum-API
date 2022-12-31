@@ -1,20 +1,29 @@
-<?php 
+<?php
 
 namespace BorumForum\Questions;
 
 use VarunS\PHPSleep\DBHandlers\DBHandler;
 
-class QuestionHandler {
+class UserKnownHandler
+{
     private $dao;
     private $user;
 
-    public function __construct($userApiKey) {
+    public function __construct($userApiKey)
+    {
         $this->dao = DBHandler::configDBFromEnv();
         $this->user = $this->dao->getUser($userApiKey);
     }
-   
 
-    public function create($data) {
+    public function getUserVoted($questionId)
+    {
+        $r = $this->dao->executeQuery("SELECT id FROM `user-question-votes` WHERE user_id = {$this->user['id']} AND question_id = $questionId");
+
+        return mysqli_num_rows($r) >= 1;
+    }
+
+    public function create($data)
+    {
         $subject = $this->dao->sanitizeParam($data['subject']);
         $body = $this->dao->sanitizeParam($data['body']);
 
@@ -34,25 +43,23 @@ class QuestionHandler {
         }
     }
 
-    public function delete($id) {
-        
+    public function delete($id)
+    {
     }
 
     /**
      * Votes up a question by inserting/updating it into the `user-message-votes` table
      * @param int $id The id of the question that the user is voting up
      */
-    public function voteUp($id) {
-
+    public function voteUp($id)
+    {
     }
 
     /**
      * Votes down a question by inserting/updating it into the `user-message-votes` table
      * @param int $id The id of the question that the user is voting down
      */
-    public function voteDown($id) {
-
+    public function voteDown($id)
+    {
     }
 }
-
-?>
