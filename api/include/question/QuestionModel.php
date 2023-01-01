@@ -22,6 +22,7 @@ class QuestionModel
             $this->guestHandler->getQuestionInfo($questionId),
             $this->guestHandler->getVotes($questionId),
             $userHandler->getUserVoted($questionId),
+            ["answers" => $this->guestHandler->getAnswers($questionId)],
             ["comments" => $this->guestHandler->getComments($questionId)]
         );
     }
@@ -31,6 +32,7 @@ class QuestionModel
         return array_merge(
             $this->guestHandler->getQuestionInfo($questionId),
             $this->guestHandler->getVotes($questionId),
+            ["answers" => $this->guestHandler->getAnswers($questionId)],
             ["comments" => $this->guestHandler->getComments($questionId)]
         );
     }

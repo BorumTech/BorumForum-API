@@ -56,6 +56,14 @@ class GuestHandler
         return $votes;
     }
 
+    public function getAnswers($id)
+    {
+        $r = $this->dao->executeQuery("SELECT answers.id, answers.user_id, answers.body, answers.date_entered, users.first_name, users.last_name, users.profile_picture FROM answers LEFT OUTER JOIN firstborumdatabase.users ON answers.user_id = users.id 
+        WHERE answers.question_id = $id");
+
+        return $r->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getComments($id)
     {
         $r = $this->dao->executeQuery("SELECT body, date_written, user_id, users.first_name, users.last_name FROM `question-comments` JOIN firstborumdatabase.users ON `question-comments`.user_id = users.id WHERE question_id = $id");
